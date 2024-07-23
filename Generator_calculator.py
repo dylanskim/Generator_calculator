@@ -27,6 +27,11 @@ def output_number_abbreviation_translator(number_out: int):
     abbreviation_table = {"": 0, "k": 3, "m": 6, "b": 9, "t": 12, "q": 15, "qi": 18, "s": 21, "sx": 24, "0": 27, "n": 30, "d": 33}
     for suffix, exponent in abbreviation_table.items():
         if (((output_length - 1) // 3) * 3) == exponent:
+            if not len(divided_number) >= 6:
+                divided_number = divided_number + "000000"
+            if int(divided_number[6]) > 0:
+                divided_number = divided_number[:4] + str(int(divided_number[4]) + 1)
+            
             abbreviated_number = divided_number[:5] + suffix
             return abbreviated_number   
    
@@ -37,5 +42,5 @@ cost = input_number_abbreviation_translator(input("Generator cost: "))
 lvl = 1 
 while lvl != 10:    
     average = int(((tick * lvl * gen) - cost) // (tick * lvl))
-    print(f"{output_number_abbreviation_translator(average)} average $ per tick at level {lvl}") 
+    print(f"{output_number_abbreviation_translator(average)} average (rounded) heat per tick at level {lvl}") 
     lvl += 1
