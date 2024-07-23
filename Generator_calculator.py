@@ -21,6 +21,12 @@ def num_abb (user_in: str):
         multi = 1*10**21
     if expo.lower() == "sx":
         multi = 1*10**24
+    if expo.lower() == "o":
+        multi = 1*10**27
+    if expo.lower() == "n":
+        multi = 1*10**30
+    if expo.lower() == "d":
+        multi = 1*10**33
 
     num = ""
     for i in user_in:
@@ -38,5 +44,5 @@ cost = num_abb(input("Generator cost: "))
 
 lvl = 1 
 while lvl != 10:    
-    print(f"{((tick * lvl * gen) - cost) // (tick * lvl)} energy per tick at level {lvl}") 
+    print(f"{int(((tick * lvl * gen) - cost) // (tick * lvl))} energy per tick at level {lvl}") 
     lvl += 1
