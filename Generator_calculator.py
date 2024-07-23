@@ -1,4 +1,4 @@
-def input_number_abbreviation_translator(user_input: str):
+def input_number_abbreviation(user_input: str):
     input_abbreviation = ""
     for i in user_input:
         if i.isalpha():
@@ -10,15 +10,15 @@ def input_number_abbreviation_translator(user_input: str):
         if input_abbreviation.lower() == suffix:
             multiplier = 10 ** exponent
 
-    num = ""
+    number = ""
     for i in user_input:
         if not i.isalpha():
-            num = "".join([num, i])
+            number = "".join([number, i])
 
-    float_out = float(num) * multiplier
+    float_out = float(number) * multiplier
     return float_out
 
-def output_number_abbreviation_translator(number_out: int):
+def output_number_abbreviation(number_out: int):
     output_length = len(str(number_out))
     if output_length >= 4:
         divided_number = str(number_out / (10 ** (((output_length - 1) // 3) * 3)))
@@ -35,12 +35,12 @@ def output_number_abbreviation_translator(number_out: int):
             abbreviated_number = divided_number[:5] + suffix
             return abbreviated_number   
    
-tick = input_number_abbreviation_translator(input("Generator base ticks: "))
-gen = input_number_abbreviation_translator(input("Generator heat per tick: "))
-cost = input_number_abbreviation_translator(input("Generator price: "))
+tick = input_number_abbreviation(input("Generator base ticks: "))
+heat = input_number_abbreviation(input("Generator heat per tick: "))
+cost = input_number_abbreviation(input("Generator price: "))
 
-lvl = 1 
-while lvl != 10:    
-    average = int(((tick * lvl * gen) - cost) // (tick * lvl))
-    print(f"{output_number_abbreviation_translator(average)} average (rounded) profit per tick at level {lvl}") 
-    lvl += 1
+level = 0
+while level != 10:    
+    average = int(((tick * (2 ** level) * heat) - cost) // (tick * (2 ** level)))
+    print(f"{output_number_abbreviation(average)} average (rounded) profit per tick at level {level}") 
+    level += 1
