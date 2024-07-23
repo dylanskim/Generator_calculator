@@ -29,18 +29,18 @@ def output_number_abbreviation_translator(number_out: int):
         if (((output_length - 1) // 3) * 3) == exponent:
             if not len(divided_number) >= 6:
                 divided_number = divided_number + "000000"
-            if int(divided_number[6]) > 0:
+            if int(divided_number[5]) > 0:
                 divided_number = divided_number[:4] + str(int(divided_number[4]) + 1)
             
             abbreviated_number = divided_number[:5] + suffix
             return abbreviated_number   
    
 tick = input_number_abbreviation_translator(input("Generator base ticks: "))
-gen = input_number_abbreviation_translator(input("Generator power per tick: "))
-cost = input_number_abbreviation_translator(input("Generator cost: "))
+gen = input_number_abbreviation_translator(input("Generator heat per tick: "))
+cost = input_number_abbreviation_translator(input("Generator price: "))
 
 lvl = 1 
 while lvl != 10:    
     average = int(((tick * lvl * gen) - cost) // (tick * lvl))
-    print(f"{output_number_abbreviation_translator(average)} average (rounded) heat per tick at level {lvl}") 
+    print(f"{output_number_abbreviation_translator(average)} average (rounded) profit per tick at level {lvl}") 
     lvl += 1
