@@ -21,7 +21,6 @@ def output_number_abbreviation(number_out: int):
     output_length = len(str(number_out))
     if output_length >= 4:
         divided_number = str(number_out / (10 ** (((output_length - 1) // 3) * 3)))
-        print(((output_length - 1) // 3) * 3)
     if output_length < 4:  
         divided_number = str(number_out)
     abbreviation_table = {"": 0, "k": 3, "m": 6, "b": 9, "t": 12, "q": 15, "qi": 18, "s": 21, "sx": 24, "o": 27, "n": 30, "d": 33}
