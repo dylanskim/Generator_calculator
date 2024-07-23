@@ -1,28 +1,41 @@
-def num_abb (user_in: str):
-    expo = ""
-    for i in user_in:
+def input_number_abbreviation_translator(user_input: str):
+    input_abbreviation = ""
+    for i in user_input:
         if i.isalpha():
-            expo = "".join([expo, i])
+            input_abbreviation = "".join([input_abbreviation, i])
     
-    multi = 1
-    table = {"": 0, "k": 3, "m": 6, "b": 9, "t": 12, "q": 15, "qi": 18, "s": 21, "sx": 24, "0": 27, "n": 30, "d": 33}
-    for abbr, expon in table.items():
-        if expo.lower() == abbr:
-            multi = 10 ** expon
+    multiplier = 1
+    abbreviation_table = {"": 0, "k": 3, "m": 6, "b": 9, "t": 12, "q": 15, "qi": 18, "s": 21, "sx": 24, "0": 27, "n": 30, "d": 33}
+    for suffix, exponent in abbreviation_table.items():
+        if input_abbreviation.lower() == suffix:
+            multiplier = 10 ** exponent
 
     num = ""
-    for i in user_in:
+    for i in user_input:
         if not i.isalpha():
             num = "".join([num, i])
 
-    float_out = float(num) * multi
+    float_out = float(num) * multiplier
     return float_out
 
-tick = num_abb(input("Generator base ticks: "))
-gen = num_abb(input("Generator power per tick: "))
-cost = num_abb(input("Generator cost: "))
+def output_number_abbreviation_translator(number_out: int):
+    output_length = len(str(number_out))
+    if output_length >= 4:
+        divided_number = str(number_out / (10 ** (((output_length - 1) // 3) * 3)))
+    if output_length <= 4:  
+        divided_number = str(number_out)
+    abbreviation_table = {"": 0, "k": 3, "m": 6, "b": 9, "t": 12, "q": 15, "qi": 18, "s": 21, "sx": 24, "0": 27, "n": 30, "d": 33}
+    for suffix, exponent in abbreviation_table.items():
+        if (((output_length - 1) // 3) * 3) == exponent:
+            abbreviated_number = divided_number[:5] + suffix
+            return abbreviated_number   
+   
+tick = input_number_abbreviation_translator(input("Generator base ticks: "))
+gen = input_number_abbreviation_translator(input("Generator power per tick: "))
+cost = input_number_abbreviation_translator(input("Generator cost: "))
 
 lvl = 1 
 while lvl != 10:    
-    print(f"{int(((tick * lvl * gen) - cost) // (tick * lvl))} average $ per tick at level {lvl}") 
+    average = int(((tick * lvl * gen) - cost) // (tick * lvl))
+    print(f"{output_number_abbreviation_translator(average)} average $ per tick at level {lvl}") 
     lvl += 1
