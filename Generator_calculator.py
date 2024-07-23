@@ -44,5 +44,5 @@ cost = num_abb(input("Generator cost: "))
 
 lvl = 1 
 while lvl != 10:    
-    print(f"{int(((tick * lvl * gen) - cost) // (tick * lvl))} energy per tick at level {lvl}") 
+    print(f"{int(((tick * lvl * gen) - cost) // (tick * lvl))} average cost per tick at level {lvl}") 
     lvl += 1
